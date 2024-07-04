@@ -585,7 +585,7 @@ def StatusHandler():
     if req is None or not isinstance(req, dict):
         #print("Invalid status request body is: ", req)
         logging.error("Invalid request data")
-        logging.error("STATUS REQUEST DATA IS THE FOLLOWING:", req)
+        logging.error("STATUS REQUEST DATA IS THE FOLLOWING: {req}")
         return "Invalid request data for getting status", 400
 
     # ELABORATE RESPONSE #################
