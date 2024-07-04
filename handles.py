@@ -540,6 +540,13 @@ def SubmitHandler():
     #print("Job was submitted with cluster id: ", out_jid)
     handle_jid(out_jid, pod)
 
+    resp = [
+        {
+            "PodUID": [],
+            "PodJID": []
+        }
+    ]
+
     try:
         with open(
             InterLinkConfigInst["DataRootFolder"] +
@@ -547,7 +554,9 @@ def SubmitHandler():
             "r",
         ) as f:
             f.read()
-        return "Job submitted successfully", 200
+        resp[0]["PodUID"] = pod["metadata"]["uid"]
+        resp[0]["PodJID"] = out_jid
+        return json.dumps(resp), 200
     except Exception as e:
         logging.error(f"Unable to read JID from file:{e}")
         return "Something went wrong in job submission", 500
@@ -600,8 +609,9 @@ def StatusHandler():
     resp = [
         {
             "name": [],
-            "uid": [],
+            "UID": [],
             "namespace": [],
+            "JID": [],
             "containers": []
         }
     ]
@@ -617,7 +627,8 @@ def StatusHandler():
         poduid = req["metadata"]["uid"]
         resp[0]["name"] = podname
         resp[0]["namespace"] = podnamespace
-        resp[0]["uid"] = poduid
+        resp[0]["UID"] = poduid
+        resp[0]["JID"] = jid_job
         process = os.popen(f"condor_q {jid_job} --json")
         preprocessed = process.read()
         process.close()
