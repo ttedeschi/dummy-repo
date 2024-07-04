@@ -580,7 +580,7 @@ def StatusHandler():
     logging.info("HTCondor Sidecar: received GetStatus call")
     request_data_string = request.data.decode("utf-8")
     #req = json.loads(request_data_string)[0]
-    req = json.loads(request_data_string)[0]
+    req = json.loads(request_data_string)
     print(req)
     if req is None or not isinstance(req, dict):
         #print("Invalid status request body is: ", req)
