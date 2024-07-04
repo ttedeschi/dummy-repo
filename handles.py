@@ -588,6 +588,11 @@ def StatusHandler():
         logging.error("Invalid request data")
         logging.error(f"STATUS REQUEST DATA IS THE FOLLOWING: {req_list}")
         return "Invalid request data for getting status", 400
+    if isinstance(req_list, list):
+        if len(req_list) == 0:
+            logging.error("Invalid request data")
+            logging.error(f"STATUS REQUEST DATA IS THE FOLLOWING: {req_list}")
+            return "Invalid request data for getting status", 400
     
     req = req_list[0]
 
