@@ -581,10 +581,11 @@ def StatusHandler():
     request_data_string = request.data.decode("utf-8")
     #req = json.loads(request_data_string)[0]
     req = json.loads(request_data_string)
-    print("STATUS REQUEST DATA IS THE FOLLOWING:, req)
+    print("STATUS REQUEST DATA IS THE FOLLOWING:", req)
     if req is None or not isinstance(req, dict):
         #print("Invalid status request body is: ", req)
         logging.error("Invalid request data")
+        logging.error("STATUS REQUEST DATA IS THE FOLLOWING:", req)
         return "Invalid request data for getting status", 400
 
     # ELABORATE RESPONSE #################
