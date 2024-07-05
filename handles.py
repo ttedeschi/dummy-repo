@@ -553,8 +553,8 @@ def SubmitHandler():
             "r",
         ) as f:
             f.read()
-        resp[0]["PodUID"] = pod["metadata"]["uid"]
-        resp[0]["PodJID"] = out_jid
+        resp["PodUID"] = pod["metadata"]["uid"]
+        resp["PodJID"] = out_jid
         return json.dumps(resp), 200
     #except Exception as e:
     else:
