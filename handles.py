@@ -540,12 +540,10 @@ def SubmitHandler():
     #print("Job was submitted with cluster id: ", out_jid)
     handle_jid(out_jid, pod)
 
-    resp = [
-        {
+    resp = {
             "PodUID": [],
             "PodJID": []
         }
-    ]
 
     try:
         with open(
